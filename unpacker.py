@@ -69,11 +69,12 @@ class PlistParser(object):
                 int(rect_list[0]) + width,
                 int(rect_list[1]) + height,
             )
-            size_list = [ int(x) for x in to_list(v['sourceSize']) ]
+            # print 'file %s (%s, %s, %d, %d)' %(k, rect_list[0], rect_list[1], width, height)
+            # size_list = [ int(x) for x in to_list(v['sourceSize']) ]
 
             rect_image = src_image.crop(bounding_box)
             if v['rotated']:
-                rect_image = rect_image.rotate(90)
+                rect_image = rect_image.transpose(Image.ROTATE_90)
 
             outfile = os.path.join(target_file_dir, k)
             rect_image.save(outfile)
